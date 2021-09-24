@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(64),
             allowNull: false
         },
-        password: {
-            type: DataTypes.STRING(40),
+        password_hash: {
+            type: DataTypes.STRING(96),
             allowNull: false
         }
     }, {
