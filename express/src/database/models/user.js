@@ -12,10 +12,6 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(32),
             allowNull: false
         },
-        dob: {
-            type: DataTypes.DATEONLY,
-            allowNull: false
-        },
         email: {
             type: DataTypes.STRING(64),
             allowNull: false

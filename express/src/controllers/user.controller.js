@@ -15,7 +15,7 @@ exports.one = async (req, res) => {
 };
 
 // Select one user from the database if username and password match
-exports.login = async (res, req) => {
+exports.login = async (req, res) => {
     const user = await db.user.findByPk(req.query.username);
 
     if(user === null || await argon2.verify(user.password_hash, req.query.password) === false)
@@ -30,10 +30,9 @@ exports.create = async (req, res) => {
     const hash = await argon2.hash(req.body.password, { type: argon2.argon2id});
 
     const user = await db.user.create({
-        username: req.body.username,
+        user_name: req.body.username,
         first_name: req.body.firstname,
         last_name: req.body.lastname,
-        dob: req.body.dob,
         email: req.body.email,
         password_hash: hash,
     });
