@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 // Implement routes here
+require("./src/routes/user.routes.js")(express, app);
 
 // Set port, listen for requests
 const PORT = 4500;

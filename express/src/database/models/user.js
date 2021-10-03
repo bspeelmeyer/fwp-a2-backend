@@ -12,16 +12,12 @@ module.exports = (sequelize, DataTypes) =>
             type: DataTypes.STRING(32),
             allowNull: false
         },
-        dob: {
-            type: DataTypes.DATEONLY,
-            allowNull: false
-        },
         email: {
             type: DataTypes.STRING(64),
             allowNull: false
         },
-        password: {
-            type: DataTypes.STRING(40),
+        password_hash: {
+            type: DataTypes.STRING(96),
             allowNull: false
         }
     }, {
