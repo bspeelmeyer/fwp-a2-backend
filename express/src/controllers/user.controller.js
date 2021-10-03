@@ -39,3 +39,20 @@ exports.create = async (req, res) => {
 
     res.json(user);
 }
+
+// Updates user via primary key user_name
+exports.updateUser = async (req, res) => {
+    const user = await db.user.findByPk(req.body.username);
+
+    const hash = await argon2.hash(req.body.password, {type: argon2.argon2id});
+    
+    user.user_name = req.body.username;
+    user.first_name = req.body.firstname;
+    user.last_name = req.body.lastname;
+    user.email = req.body.email;
+    user.password_hash = hash;
+
+    await user.save();
+
+    res.json(user);
+}
