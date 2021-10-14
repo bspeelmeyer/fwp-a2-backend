@@ -10,6 +10,8 @@ module.exports = (express, app) => {
     // Get all posts
     router.get("/", controller.all);
 
+    router.get("/replies", controller.allReplies);
+
      // Add route to server
      app.use("/api/posts", router);
 }
