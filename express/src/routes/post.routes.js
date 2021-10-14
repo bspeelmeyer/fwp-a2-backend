@@ -12,6 +12,10 @@ module.exports = (express, app) => {
 
     router.get("/replies", controller.allReplies);
 
+    router.post("/getbyid/:id", controller.getPostById);
+
+    router.put("/update", controller.updatePost);
+
      // Add route to server
      app.use("/api/posts", router);
 }

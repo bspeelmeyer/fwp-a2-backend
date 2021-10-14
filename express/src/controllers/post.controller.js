@@ -46,3 +46,20 @@ exports.allReplies = async (req, res) => {
 
     res.json(replies);
 }
+
+exports.getPostById = async (req, res) => {
+    const post = await db.posts.findByPk(req.params.id);
+
+    res.json(post);
+}
+
+exports.updatePost = async (req, res) => {
+    const post = await db.posts.findByPk(req.body.post_id);
+    console.log(req.body.id);
+    console.log(req.body.post_content);
+    post.post_content = req.body.post_content;
+
+    await post.save();
+
+    res.json(post);
+}
