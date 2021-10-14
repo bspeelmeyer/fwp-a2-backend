@@ -34,7 +34,7 @@ exports.create = async (req, res) => {
 
 // Get all posts
 exports.all = async (req, res) => {
-    const posts = await db.posts.findAll();
+    const posts = await db.posts.findAll({where: {parent_post_id: null}});
 
     res.json(posts);
 }
