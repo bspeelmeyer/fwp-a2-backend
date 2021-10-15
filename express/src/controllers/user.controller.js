@@ -56,3 +56,13 @@ exports.updateUser = async (req, res) => {
 
     res.json(user);
 }
+
+exports.deleteUser = async (req,res) => {
+    await db.posts.destroy({where: {user_name: req.body.user_name}});
+    await db.liked_posts.destroy({where: {liked_by: req.body.user_name}});
+    await db.follows.destroy({where: {follower: req.body.user_name}});
+    await db.follows.destroy({where: {followed: req.body.user_name}});
+    await db.user.destroy({where: {user_name: req.body.user_name}});
+
+    res.sendStatus(200);
+}
