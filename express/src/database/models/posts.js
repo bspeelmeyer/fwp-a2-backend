@@ -12,12 +12,8 @@ module.exports = (sequelize, DataTypes) =>
         allowNull: false,
       },
       image: {
-        type: DataTypes.BLOB,
+        type: DataTypes.STRING(50),
         allowNull: true,
-      },
-      user_id: {
-        type: DataTypes.STRING(32),
-        allowNull: false,
       },
       parent_post_id: {
         type: DataTypes.INTEGER,
