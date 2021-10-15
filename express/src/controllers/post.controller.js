@@ -63,3 +63,9 @@ exports.updatePost = async (req, res) => {
 
     res.json(post);
 }
+
+exports.deletePost = async (req, res) => {
+    await db.posts.destroy({where: {post_id: req.body.post_id}});
+
+    res.sendStatus(200);
+}
