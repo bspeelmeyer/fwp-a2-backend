@@ -16,6 +16,8 @@ module.exports = (express, app) => {
 
     router.put("/update", controller.updatePost);
 
+    router.post("/delete", controller.deletePost);
+
      // Add route to server
      app.use("/api/posts", router);
 }
