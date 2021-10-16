@@ -20,6 +20,8 @@ module.exports = (express, app) => {
     // Delete user
     router.post("/delete", controller.deleteUser);
 
+    router.post("/allusers", controller.getUsers);
+
     // Add router to server
     app.use("/api/users", router);
 };
