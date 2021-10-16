@@ -1,5 +1,6 @@
 const db = require("../database");
 const argon2 = require("argon2");
+const { Op } = require("sequelize");
 
 // Select all users from the database
 exports.all = async (req, res) => {
@@ -65,4 +66,10 @@ exports.deleteUser = async (req,res) => {
     await db.user.destroy({where: {user_name: req.body.user_name}});
 
     res.sendStatus(200);
+}
+
+exports.getUsers = async (req, res) => {
+   const users = await db.user.findAll({where: {user_name: { [Op.notLike]: req.body.user_name}}});
+
+    res.json(users)
 }

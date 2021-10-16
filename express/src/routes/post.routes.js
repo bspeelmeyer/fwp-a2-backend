@@ -8,7 +8,7 @@ module.exports = (express, app) => {
     router.post("/upload-image", controller.uploadImage);
 
     // Get all posts
-    router.get("/", controller.all);
+    router.post("/allposts", controller.all);
 
     router.get("/replies", controller.allReplies);
 
