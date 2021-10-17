@@ -1,7 +1,18 @@
-const e = require("express");
 const { Op } = require("sequelize");
 const db = require("../database");
-
+/**
+ * This function handles the event of a user liking a post,
+ * first it will check the database to see if the relationship
+ * already exists, id it doesn't it will create it, if it does
+ * it will check to see if the user has disliked the post, if so,
+ * it will adjust the counts of likes and dislikes on the post and
+ * the relationship in the database, if the user has already liked
+ * the post, the function will update the counts on the post and
+ * delete the relationship, basically unliking the post.
+ * @param user_name
+ * @param post_id
+ * @returns result of the operation
+ */
 exports.likePost = async (req, res) => {
   const like = await db.liked_posts.findOne({
     where: {
@@ -26,8 +37,6 @@ exports.likePost = async (req, res) => {
 
     res.json(createLike);
   } else if (like.disliked === 1) {
-    console.log("this is inside the sec if!!!!!!!!!!!!!!!!!!");
-
     like.liked = 1;
     like.disliked = 0;
 
@@ -42,8 +51,6 @@ exports.likePost = async (req, res) => {
 
     res.json(like);
   } else if (like.liked === 1) {
-    console.log("this is inside the last if!!!!!!!!!!!!!!!!!!");
-
     await db.liked_posts.destroy({
       where: {
         [Op.and]: [
@@ -60,7 +67,13 @@ exports.likePost = async (req, res) => {
     post.save();
   }
 };
-
+/**
+ * This function does the same as the likePost function
+ * but for the dislike post operation
+ * @param user_name
+ * @param post_id
+ * @returns result of the operation
+ */
 exports.dislikePost = async (req, res) => {
   const dislike = await db.liked_posts.findOne({
     where: {
@@ -115,7 +128,12 @@ exports.dislikePost = async (req, res) => {
     post.save();
   }
 };
-
+/**
+ * This function takes the user_name and returns
+ * an array of all post the user has liked
+ * @param user_name
+ * @returns Array of liked posts
+ */
 exports.likedPosts = async (req, res) => {
   const likedPosts = await db.liked_posts.findAll({
     where: { [Op.and]: [{ liked_by: req.body.user_name }, { liked: 1 }] },
@@ -123,7 +141,12 @@ exports.likedPosts = async (req, res) => {
 
   res.json(likedPosts);
 };
-
+/**
+ * Function takes the user_name and returns
+ * an array of all post the user has disliked
+ * @param user_name
+ * @returns Array of disliked posts
+ */
 exports.dislikedPosts = async (req, res) => {
   const dislikedPosts = await db.liked_posts.findAll({
     where: { [Op.and]: [{ liked_by: req.body.user_name }, { disliked: 1 }] },
