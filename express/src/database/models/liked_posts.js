@@ -13,6 +13,12 @@ module.exports = (sequelize, DataTypes) =>
           key: "user_name",
         },
       },
+      liked: {
+        type: DataTypes.INTEGER,
+      },
+      disliked: {
+        type: DataTypes.INTEGER,
+      },
       post: {
         type: DataTypes.INTEGER,
         primaryKey: true,

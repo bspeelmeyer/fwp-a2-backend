@@ -19,6 +19,14 @@ module.exports = (sequelize, DataTypes) =>
         type: DataTypes.INTEGER,
         allowNull: true,
       },
+      likes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
+      dislikes: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+      },
     },
     {
       // Don't add timestamp attribute
